@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication a(argc, argv);    
     Server server;
     if (!server.starServer(3333)){
         qDebug() << "Ошибка: " << server.errorString();

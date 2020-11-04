@@ -15,11 +15,17 @@ bool Server::starServer(quint16 port)
 
 void Server::incomingConnection(qintptr handle)
 {
+    qDebug() << "Подключился клиент: " << handle;
     auto socket = new Socket(handle, this);
     mSocked << socket;
 
-    connect(socket, &Socket::ReadyRead, [&] (Socket *str){
-        qDebug() << "ReadyRead";
+    for (auto i : mSocked){
+        QTextStream t(i);
+        t << "Сервер: вы подключены " << handle;
+        i->flush();
+    }
+
+    connect(socket, &Socket::ReadyRead, [&] (Socket *str){       
         QTextStream ts_1(str);
         auto text = ts_1.readAll();
 
@@ -29,8 +35,7 @@ void Server::incomingConnection(qintptr handle)
             i->flush();
         }
     });
-    connect(socket, &Socket::StateChanged, [&](Socket *str, int x){
-        qDebug() << "StateChanged";
+    connect(socket, &Socket::StateChanged, [&](Socket *str, int x){        
         if (x == QTcpSocket::UnconnectedState){
             mSocked.removeOne(str);
             for(auto i : mSocked){
