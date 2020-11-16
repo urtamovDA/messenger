@@ -15,13 +15,13 @@ bool Server::starServer(quint16 port)
 
 void Server::incomingConnection(qintptr handle)
 {
-    qDebug() << "Подключился клиент: " << handle;
+    qDebug() << "Client connected: " << handle;
     auto socket = new Socket(handle, this);
     mSocked << socket;
 
     for (auto i : mSocked){
         QTextStream t(i);
-        t << "Сервер: вы подключены " << handle;
+        t << "Server: you are connected " << handle;
         i->flush();
     }
 
@@ -40,7 +40,7 @@ void Server::incomingConnection(qintptr handle)
             mSocked.removeOne(str);
             for(auto i : mSocked){
                 QTextStream ts(i);
-                ts << "Сервер: клиент " << str->socketDescriptor() << "отключился.";
+                ts << "Server: client " << str->socketDescriptor() << "black out.";
                 i->flush();
             };
         };
