@@ -21,8 +21,8 @@ add_executable(client
     src/connection.cpp
     inc/widget.h
     inc/connection.h
-    widget.ui
-    connection.ui
+    src/connection.ui
+    src/widget.ui
 )
 
 target_link_libraries(client

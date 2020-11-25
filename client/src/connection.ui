@@ -36,7 +36,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="hostname"/>
+      <widget class="QLineEdit" name="hostname">
+       <property name="inputMask">
+        <string/>
+       </property>
+       <property name="text">
+        <string>localhost</string>
+       </property>
+       <property name="placeholderText">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -57,8 +67,14 @@
      </item>
      <item>
       <widget class="QSpinBox" name="port">
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
        <property name="maximum">
         <number>9999999</number>
+       </property>
+       <property name="value">
+        <number>3333</number>
        </property>
       </widget>
      </item>

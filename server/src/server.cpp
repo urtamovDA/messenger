@@ -25,9 +25,11 @@ void Server::incomingConnection(qintptr handle)
         i->flush();
     }
 
-    connect(socket, &Socket::ReadyRead, [&] (Socket *str){       
+    connect(socket, &Socket::ReadyRead, [&] (Socket *str){
         QTextStream ts_1(str);
         auto text = ts_1.readAll();
+
+        qDebug() << "Server: " << "send message" << text;
 
         for(auto i : mSocked){
             QTextStream ts_2(i);
